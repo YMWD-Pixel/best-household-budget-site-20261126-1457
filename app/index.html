@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearth &amp; Ledger — Household Budget</title>
+<meta name="description" content="Hearth & Ledger is a household budget site: track spending, set budgets, save toward goals, and see where every dollar goes.">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#/dashboard">
+    <span class="brand-mark" aria-hidden="true">⌂</span>
+    <span class="brand-text"><strong>Hearth &amp; Ledger</strong><small>Household budget, kept honest</small></span>
+  </a>
+  <nav class="mainnav" aria-label="Sections">
+    <a href="#/dashboard" data-nav="dashboard">Dashboard</a>
+    <a href="#/transactions" data-nav="transactions">Transactions</a>
+    <a href="#/budgets" data-nav="budgets">Budgets</a>
+    <a href="#/goals" data-nav="goals">Goals</a>
+    <a href="#/insights" data-nav="insights">Insights</a>
+  </nav>
+  <div class="top-actions">
+    <span class="month-pill" id="monthPill">November 2026</span>
+    <button class="btn btn-primary" id="quickAddBtn" type="button">+ Add transaction</button>
+  </div>
+</header>
+
+<main id="view" class="view" aria-live="polite"></main>
+
+<footer class="footer">
+  <p><strong>Hearth &amp; Ledger</strong> — a household budget kept on this device. Your figures are stored only in this browser (local storage); nothing is sent anywhere.</p>
+  <p><a href="#/dashboard">Dashboard</a> · <a href="#/transactions">Transactions</a> · <a href="#/budgets">Budgets</a> · <a href="#/goals">Goals</a> · <a href="#/insights">Insights</a> · <button class="linklike" id="resetDemoBtn" type="button">Reset demo data</button></p>
+</footer>
+
+<dialog id="txDialog" class="dialog">
+  <form id="txForm" method="dialog">
+    <h2 id="txDialogTitle">Add transaction</h2>
+    <div class="form-grid">
+      <label>Type
+        <select id="txType" name="type">
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
+        </select>
+      </label>
+      <label>Amount (USD)
+        <input id="txAmount" name="amount" type="number" min="0.01" step="0.01" required placeholder="0.00">
+      </label>
+      <label>Date
+        <input id="txDate" name="date" type="date" required>
+      </label>
+      <label>Category
+        <select id="txCategory" name="category"></select>
+      </label>
+      <label class="span-2">Description
+        <input id="txDescription" name="description" type="text" required maxlength="80" placeholder="e.g. Weekly shop at Green Mart">
+      </label>
+      <label class="span-2">Paid from
+        <select id="txAccount" name="account">
+          <option>Joint checking</option>
+          <option>Household cash</option>
+          <option>Credit card ·· 4417</option>
+        </select>
+      </label>
+    </div>
+    <div class="dialog-actions">
+      <button class="btn" id="txCancelBtn" type="button">Cancel</button>
+      <button class="btn btn-danger hidden" id="txDeleteBtn" type="button">Delete</button>
+      <button class="btn btn-primary" type="submit">Save transaction</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="goalDialog" class="dialog">
+  <form id="goalForm" method="dialog">
+    <h2 id="goalDialogTitle">Add to goal</h2>
+    <p class="muted" id="goalDialogSub"></p>
+    <div class="form-grid">
+      <label>Amount (USD)
+        <input id="goalAmount" name="amount" type="number" min="0.01" step="0.01" required placeholder="0.00">
+      </label>
+      <label>Date
+        <input id="goalDate" name="date" type="date" required>
+      </label>
+    </div>
+    <div class="dialog-actions">
+      <button class="btn" id="goalCancelBtn" type="button">Cancel</button>
+      <button class="btn btn-primary" type="submit">Add contribution</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
